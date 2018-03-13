@@ -36,7 +36,7 @@ export default class List extends React.Component {
     for(let [index, image] of this.state.items.entries()) {
       
       imageName = `${this.state.exportPath}/resized-${image.name}`
-      await sharp(image.path).resize(200).toFile(imageName, (err, info) => {
+      await sharp(image.path).resize(parseInt(this.maximumWidth.value)).toFile(imageName, (err, info) => {
         if(err) {
           console.log(err)
         } 
@@ -80,6 +80,8 @@ export default class List extends React.Component {
     
     var { items } = this.props;
     var numItems = items.length;
+    var numItemsText = numItems > 1 ? 'items' : 'item'
+
 
     return (
       <div id="rs-dropzone" className="rs-dropzone rs-dropzone--top">
@@ -110,8 +112,11 @@ export default class List extends React.Component {
         </div>
 
         <div className="rs-toolbar">
-            <span className="rs-item-qty">{ numItems } items</span>
-            <button disabled={this.state.isProcessingResize} onClick={this.handleResize.bind(this)} className="rs-button">Resize</button>
+            <span className="rs-item-qty">{ numItems } {numItemsText} </span>
+            <div>
+              <input defaultValue="768" ref={ (width) => this.maximumWidth = width } className="rs-input" type="text" placeholder="Maximum width of images" />
+              <button disabled={this.state.isProcessingResize} onClick={this.handleResize.bind(this)} className="osxbutton">Resize</button>
+            </div>
         </div>
 
       </div>

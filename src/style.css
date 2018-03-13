@@ -98,6 +98,13 @@ html, body {
     font-size: .875em;
 }
 
+.rs-input {
+    margin-right: .4em;
+    padding: 1.1em .75em;
+    min-width: 14.2em;
+    font-size: 0.7em;
+}
+
 .rs-button {
     background-color: green;
     color: #FFF;
@@ -109,4 +116,26 @@ html, body {
 .rs-button:disabled {
     background-color: #b1b1b1;
     cursor: wait;
+}
+
+
+.osxbutton {
+    position: relative;
+    vertical-align: top;
+    padding: .5em .75em;
+    font-size: 1.125em;
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    background: #27ae60;
+    border: 0;
+    border-bottom: 2px solid #219d55;
+    cursor: pointer;
+    box-shadow: inset 0 -2px #219d55;
+    transition: 0.5s;
+}
+
+.osxbutton:hover {
+    background: #218e4f;
+    box-shadow: inset 0 0 #219d55;
 }
