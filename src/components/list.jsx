@@ -1,4 +1,7 @@
 import React from 'react';
+import ViewList from './views/list';
+import ViewGrid from './views/grid';
+
 const { dialog } = require('electron').remote;
 var sharp = require('sharp');
 var path = require('path');
@@ -8,6 +11,7 @@ export default class List extends React.Component {
   constructor(props) {
     super();
     this.state = {
+      view: 'list', //List || grid
       items: props.items,
       exportPath: '',
       isProcessingResize: false,
@@ -76,43 +80,34 @@ export default class List extends React.Component {
     };
   }
 
+  changeLayout(layout) {
+    this.setState({
+      view: layout
+    })
+  }
+
   render() {
     
     var { items } = this.props;
     var numItems = items.length;
     var numItemsText = numItems > 1 ? 'items' : 'item'
+    var preview;
+
+
+    var view = this.state.view == 'grid' ? <ViewList items={items} /> : <ViewGrid items={items} />
 
 
     return (
       <div id="rs-dropzone" className="rs-dropzone rs-dropzone--top">
+
+      { view }
         
-        <div className="rs-table-wrapper">
-          <table className={ this.state.isProcessingResize ? "rs-table--processing rs-table" : "rs-table" }>
-
-            <thead>
-              <tr>
-                <th>File</th>
-                <th>Size</th>
-              </tr>
-            </thead>
-
-            <tbody>
-            {
-              items.map((item, index) => {
-                return (
-                  <tr key={index} className={ this.state.isProcessingComplete ? "rs-table-processing-complete" : "" }>
-                    <td>{item.name}</td>
-                    <td>{this.formatBytes(item.size)}</td>
-                  </tr>
-                )
-              })
-            }
-            </tbody>
-          </table>
-        </div>
-
         <div className="rs-toolbar">
+          <div>
             <span className="rs-item-qty">{ numItems } {numItemsText} </span>
+            <button onClick={this.changeLayout.bind(this, 'list')}>List</button>
+            <button onClick={this.changeLayout.bind(this, 'grid')}>Grid</button>
+          </div>  
             <div>
               <input defaultValue="768" ref={ (width) => this.maximumWidth = width } className="rs-input" type="text" placeholder="Maximum width of images" />
               <button disabled={this.state.isProcessingResize} onClick={this.handleResize.bind(this)} className="osxbutton">Resize</button>
@@ -123,12 +118,5 @@ export default class List extends React.Component {
     );
   }
 
-  formatBytes(bytes,decimals) {
-    if(bytes == 0) return '0 Bytes';
-    var k = 1024,
-        dm = decimals || 2,
-        sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-        i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-  }
+  
 }

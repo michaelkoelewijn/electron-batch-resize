@@ -1,6 +1,6 @@
 html, body {
     margin: 0;
-    background: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, .01);
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
 }
 
@@ -80,6 +80,56 @@ html, body {
     background-color: #c8e0b2!important;
 }
 
+
+.rs-list-wrapper {
+    width: 100%;
+    height: calc(100% - 60px);
+    overflow: auto;
+}
+
+.rs-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.rs-list li {
+    width: 12.5%;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rs-list li .rs-list-item {
+    padding: .1em;
+    width: 100%;
+    background-color: #eee;
+}
+
+.rs-list li figure {
+    margin: 0;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.rs-list li figure:before {
+    content: "";
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+    padding-bottom: 75%;
+}
+.rs-list li figure:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
 .rs-toolbar {
     display: flex;
     height: 60px;
@@ -96,26 +146,19 @@ html, body {
 
 .rs-item-qty {
     font-size: .875em;
+    margin-right: .5em;
 }
 
 .rs-input {
-    margin-right: .4em;
+    margin-right: .25em;
     padding: 1.1em .75em;
     min-width: 14.2em;
     font-size: 0.7em;
 }
 
-.rs-button {
-    background-color: green;
-    color: #FFF;
-    font-size: .875em;
-    border: 0;
-    padding: .8em 2em;
-}
 
-.rs-button:disabled {
-    background-color: #b1b1b1;
-    cursor: wait;
+button + button {
+    margin-left: .5em;
 }
 
 
