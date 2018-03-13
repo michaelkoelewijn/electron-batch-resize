@@ -21,7 +21,7 @@
           "squirrel"
         ],
         "darwin": [
-          "zip"
+          "dmg"
         ],
         "linux": [
           "deb",
@@ -29,7 +29,7 @@
         ]
       },
       "electronPackagerConfig": {
-
+        "icon": "src/assets/icon.icns"
       },
       "electronWinstallerConfig": {
         "name": "resizer_electron"
